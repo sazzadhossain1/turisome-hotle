@@ -1,0 +1,16 @@
+
+.information-container{
+    border: 1px solid black;
+    width: 400px;
+    text-align: center;
+    padding: 20px;
+   background-color: black;
+   color:aqua;
+   border-radius: 20px;
+}
+.information-container img{
+    width: 350px;
+    height: 250px;
+}
+
+

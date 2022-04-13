@@ -1,0 +1,27 @@
+.header a{
+    margin: 20px;
+    text-decoration: none;
+    color: blue;
+
+
+
+}
+
+
+.header a:hover{
+    color: rgb(150, 150, 207);
+}
+
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    
+}
+
+.title-name{
+    margin-right: 70px;
+    color: rgb(143, 143, 255);
+}
+

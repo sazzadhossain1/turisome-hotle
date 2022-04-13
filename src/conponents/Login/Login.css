@@ -1,0 +1,51 @@
+.from-container {
+  width: 600px;
+  border: 1px solid black;
+  box-sizing: border-box;
+  border-radius: 8px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  
+  
+}
+
+.from-title {
+  font-size: 35px;
+  color: rgb(10, 8, 8);
+  font-weight: 400;
+}
+
+.form-submit {
+  width: 415px;
+  height: 55px;
+  background-color: bisque;
+  border-radius: 5px;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.form-link a {
+  color: blue;
+  text-decoration: none;
+  margin-top: 20px;
+}
+.google-button {
+  width: 350px;
+  border: none;
+  margin: 20px;
+  padding: 5px;
+  background-color: bisque;
+  border-radius: 10px;
+}
+.google {
+  height: 30px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+
+.input-group{
+    display: block;
+}
