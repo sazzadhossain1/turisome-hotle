@@ -7,6 +7,7 @@ import SingUp from './conponents/SingUp/SingUp';
 import SingleRoom from './conponents/SingleRoom/SingleRoom';
 import DoubleRoom from './conponents/DoubleRoom/DoubleRoom';
 import FamilyRoom from './conponents/FamilyRoom/FamilyRoom';
+import RequireAuth from './conponents/RequireAuth/RequireAuth';
 function App() {
   return (
     <div className="App">
@@ -16,10 +17,24 @@ function App() {
         <Route path='/home' element={<Home></Home>}></Route>
         <Route path='login' element={<Login></Login>}></Route>
         <Route path='/singUp' element={<SingUp></SingUp>}></Route>
-        <Route path='singleRoom' element={<SingleRoom></SingleRoom>}></Route>
+        <Route path='singleRoom' element={
+          <RequireAuth>
+            <SingleRoom></SingleRoom>
+          </RequireAuth>
+        }></Route>
 
-        <Route path="/doubleRoom" element={<DoubleRoom></DoubleRoom>}></Route>
-        <Route path='familyRoom' element={<FamilyRoom></FamilyRoom>}></Route>
+        <Route path="/doubleRoom" element={
+          <RequireAuth>
+            <DoubleRoom></DoubleRoom>
+          </RequireAuth>
+        }></Route>
+
+        <Route path='familyRoom' element={
+
+          <RequireAuth>
+            <FamilyRoom></FamilyRoom>
+          </RequireAuth>
+        }></Route>
         <Route></Route>
       </Routes>
     </div>

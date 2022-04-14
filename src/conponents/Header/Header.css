@@ -25,3 +25,11 @@
     color: rgb(143, 143, 255);
 }
 
+.button-sign{
+    border: none;
+    background-color: black;
+    color: blue;
+}
+.button-sign:hover{
+    color: rgb(150, 150, 207);
+}
