@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Information.css';
 
 const Information = ({room}) => {
@@ -11,7 +11,7 @@ const Information = ({room}) => {
             <h3>Review - {review}</h3>
             <h4>Rating - {rating}</h4>
             
-            <button onClick={() => Navigate("/singleRoom")}>Book Now</button>
+            <Link to="/singleRoom"><button className='information-buton'>Book Now</button></Link>
         </div>
     );
 };

@@ -16,7 +16,7 @@ const Home = () => {
       <div>
         
         <Banner className='banner'></Banner>
-        <div className="room-details">
+        <div className="row room-details">
           {rooms.map((room) => (
             <Information key={room.id} room={room}></Information>
           ))}
