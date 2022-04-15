@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../images/logo/google.png";
 import "./SingUp.css";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import {
+  useCreateUserWithEmailAndPassword,
+  useUpdateProfile,
+} from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 
 const SingUp = () => {
@@ -15,7 +18,9 @@ const SingUp = () => {
   const navigate = useNavigate();
 
   const [createUserWithEmailAndPassword, user] =
-    useCreateUserWithEmailAndPassword(auth);
+    useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+
+  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
   const handleEmailBlur = (event) => {
     setEmail(event.target.value);
@@ -30,11 +35,12 @@ const SingUp = () => {
   };
 
   if (user) {
-    navigate("/home");
+    console.log('user', user);
   }
 
-  const handleCreateUser = (event) => {
+  const handleCreateUser = async (event) => {
     event.preventDefault();
+    const name = event.target.name.value;
     if (password !== confirmPassword) {
       setError("Your two passwords did not match");
       return;
@@ -43,14 +49,12 @@ const SingUp = () => {
       setError("password must  be 6 characters or longer");
       return;
     }
-    if(agree){
 
-      createUserWithEmailAndPassword(email, password);
-    }
-    
+   await createUserWithEmailAndPassword(email, password);
+   await updateProfile({ displayName: name});
+          console.log('Updated profile');
+          navigate("/home");
   };
-
-  
 
   return (
     <div className="from-container">
@@ -97,13 +101,28 @@ const SingUp = () => {
               />
             </div>
           </div>
-          <input onClick={() =>setAgree(!agree)} className="mt-4" type="checkbox" name="terms" id="terms" />
-          <label className="ms-2" htmlFor="terms">Accept terms and conditions</label>
+          <input
+            onClick={() => setAgree(!agree)}
+            className="mt-4 me-2"
+            type="checkbox"
+            name="terms"
+            id="terms"
+          />
+          <label
+            className={agree ? "text-primary" : "text-danger"}
+            htmlFor="terms"
+          >
+            Accept terms and conditions
+          </label>
 
           <p style={{ color: "red" }}>{error}</p>
-          
-          
-          <input  className="form-submit mt-5" type="submit" value="SingUp" />
+
+          <input
+            disabled={!agree}
+            className="form-submit mt-5"
+            type="submit"
+            value="SingUp"
+          />
         </form>
         <p className="form-link">
           Already have an account? <Link to="/login">Login</Link>
