@@ -6,6 +6,8 @@ import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 
 const SingUp = () => {
+  const [agree, setAgree] = useState(false);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -41,12 +43,15 @@ const SingUp = () => {
       setError("password must  be 6 characters or longer");
       return;
     }
-    createUserWithEmailAndPassword(email, password);
+    if(agree){
+
+      createUserWithEmailAndPassword(email, password);
+    }
+    
   };
 
-
-
   
+
   return (
     <div className="from-container">
       <div>
@@ -92,8 +97,13 @@ const SingUp = () => {
               />
             </div>
           </div>
+          <input onClick={() =>setAgree(!agree)} className="mt-4" type="checkbox" name="terms" id="terms" />
+          <label className="ms-2" htmlFor="terms">Accept terms and conditions</label>
+
           <p style={{ color: "red" }}>{error}</p>
-          <input className="form-submit mt-5" type="submit" value="SingUp" />
+          
+          
+          <input  className="form-submit mt-5" type="submit" value="SingUp" />
         </form>
         <p className="form-link">
           Already have an account? <Link to="/login">Login</Link>

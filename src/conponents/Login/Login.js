@@ -5,6 +5,7 @@ import gitHub from "../../images/logo/GitHub-Mark.png";
 import facebook from "../../images/logo/facebook.png";
 import { useState } from "react";
 import {
+  useSendPasswordResetEmail,
   useSignInWithEmailAndPassword,
   useSignInWithGithub,
   useSignInWithGoogle,
@@ -23,9 +24,22 @@ const Login = () => {
 
     const [signInWithGithub, gituser, gitloading, giterror] = useSignInWithGithub(auth);
 
+    const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(
+      auth
+    );
+
   const navigate = useNavigate();
 
 
+
+
+const resetPassword = async() =>{
+  // const email = emailRef.current.value;
+  await sendPasswordResetEmail(email);
+  alert('Sent email');
+
+
+}
   let errorElement;
 
   
@@ -127,6 +141,11 @@ if(user1 || gituser){
         <p className="form-link">
           New from this site? <Link to="/singUp">Create an Account</Link>
         </p>
+        <p className="form-link">
+          Forget Password ? <Link to="/singUp" 
+          onClick={resetPassword}>Reset password</Link>
+        </p>
+        
         {errorElement }
        <div>
        <button  onClick={()=>signInWithGoogle()} className="google-button">
