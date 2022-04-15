@@ -6,6 +6,7 @@ import facebook from "../../images/logo/facebook.png";
 import { useState } from "react";
 import {
   useSignInWithEmailAndPassword,
+  useSignInWithGithub,
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
@@ -17,7 +18,31 @@ const Login = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
 
+
+    const [signInWithGoogle, user1, loading1, error1] = useSignInWithGoogle(auth);
+
+    const [signInWithGithub, gituser, gitloading, giterror] = useSignInWithGithub(auth);
+
   const navigate = useNavigate();
+
+
+  let errorElement;
+
+  
+
+  if (error1 || giterror) {
+    errorElement =<div><p className="text-danger">Error: {error1?.message} {giterror?.message}</p></div>
+    
+  }
+ 
+if(user1 || gituser){
+  navigate('/home')
+}
+
+
+
+
+
 
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -41,22 +66,26 @@ const Login = () => {
 
 
 
-
-
-
-  const [signInWithGoogle, user1, loading1, error1] = useSignInWithGoogle(auth);
-  let errorElement;
-
-  if (error1) {
-    errorElement =<div><p className="text-danger">Error: {error1.message}</p></div>
-    
+  if (loading1 || gitloading) {
+    return <p>Loading...</p>;
   }
-if(user1){
-  navigate('/home')
-}
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
   return (
-    <div>
-      {errorElement }
+    <div className="row">
+      
       <div className="from-container">
         <h1 className="from-title">Login</h1>
         <form className="form-f" onSubmit={handleUserSingIn}>
@@ -98,15 +127,15 @@ if(user1){
         <p className="form-link">
           New from this site? <Link to="/singUp">Create an Account</Link>
         </p>
-
+        {errorElement }
        <div>
        <button  onClick={()=>signInWithGoogle()} className="google-button">
           <img className="google" src={logo} alt="" /> Countinue with Google
         </button>
        
        </div>
-       <button className="google-button">
-          <img className="google" src={gitHub} alt="" /> Countinue with Google
+       <button onClick={() => signInWithGithub()} className="google-button">
+          <img className="google" src={gitHub} alt="" /> Countinue with GitHub
         </button>
         <button className="google-button">
           <img className="google" src={facebook} alt="" /> Countinue with Google
