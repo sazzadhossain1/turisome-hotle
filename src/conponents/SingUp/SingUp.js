@@ -43,6 +43,10 @@ const SingUp = () => {
     }
     createUserWithEmailAndPassword(email, password);
   };
+
+
+
+  
   return (
     <div className="from-container">
       <div>

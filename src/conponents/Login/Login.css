@@ -4,9 +4,11 @@
   box-sizing: border-box;
   border-radius: 8px;
   margin: auto;
-  display: flex;
-  justify-content: center;
-  
+  margin-left: 600px;
+  display: block;
+  text-align: center;
+  margin-top: 30px;
+
   
 }
 
@@ -45,7 +47,14 @@
   border-radius: 50%;
 }
 
-
-.input-group{
-    display: block;
+.input-group {
+  display: block;
+}
+.email-class{
+  display: block;
+  margin-right: 152px;
+}
+.password-class {
+  margin-right: 120px;
+  display: block;
 }
